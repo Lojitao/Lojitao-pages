@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div id="app">
+        <nav class="nav">
+          <h2 class="nav__header">Products</h2>
+          <div class="nav__cart">
+            <button @click="showCart = !showCart">
+              <i class="fas fa-shopping-cart"></i>
+            </button>
+            <span class="total-quantity">{{ totalQuantity }}</span>
+            <div v-if="showCart" class="cart-dropdown">
+              <ul class="cart-dropdown__list">
+                <li
+                  v-for="product in cart"
+                  :key="product.id"
+                >
+                  {{ product.name }} ({{ product.quantity }})
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      
+       
+        <section class="products">
+          <div v-for="product in products" :key="product.id" class="product">
+            <h3 class="product__header">{{ product.name }}</h3>
+            <img
+              src="https://via.placeholder.com/150"
+              :alt="product.name"
+              class="product__image"
+            >
+            <p class="product__description">{{ product.description }}</p>
+            <div class="cart">
+              <button
+                @click="updateCart(product, 'subtract')"
+                class="cart__button"
+              >
+                -
+              </button>
+              <span class="cart__quantity">{{ product.quantity }}</span>
+              <button
+                @click="updateCart(product, 'add')"
+                class="cart__button"
+              >
+                +
+              </button>
+            </div>
+          </div>
+        </section>  
+        
+      </div>
+   
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="/shopCart/cart.js"></script>
+    
+</body>
+</html>
